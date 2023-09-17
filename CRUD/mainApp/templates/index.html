@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #mycontainer{
+            margin-left: 38%;
+            margin-top: 5%;
+        }
+        h1{
+            background-color: tomato;
+            color: white;
+            text-align: center;
+            padding: 1.2rem;
+        }
+        table{
+            border: 1px solid black;
+        }
+        th, td{
+            padding: 5px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <a href="/"><H1>HOME</H1></a>
+    <h1>Employee Management system</h1>
+    <button>
+        <a href="add_employee">Add New Employee</a>
+    </button>
+    {% if request.user.is_authenticated %}
+        <button>
+            <a href="/logout/">Logout</a>
+        </button>
+    {% else %}
+    <button>
+        <a href="/login/">Login</a>
+    </button>
+    {% endif %}
+    {{request.user}}
+    <br>
+    {{request.user.first_name}}
+    {{request.user.last_name}}
+    <div id="mycontainer">
+        <form action="/Search/" method="post">
+            {% csrf_token %}
+            <label>Employee Name</label>
+            <input type="text" name="name" required>
+            <input type="submit" name="submit" id="submit" value="Search">
+        </form><br>
+        <table>
+            <tr>
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th colspan="2">Edit / Delete</th>
+            </tr>
+            {% for i in emp_data %}
+            <tr>
+                <td>{{ i.emp_id }}</td>
+                <td>{{ i.Name }}</td>
+                <td>{{ i.Department }}</td>
+                <td>{{ i.Salary }}</td>
+                <td>
+                    <a href="edit_employee/{{i.emp_id}}">Edit</a>
+                </td>
+                <td>
+                    <a href="delete_employee/{{i.emp_id}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div> 
+</body>
+</html>

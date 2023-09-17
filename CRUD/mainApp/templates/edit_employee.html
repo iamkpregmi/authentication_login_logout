@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            background-color: tomato;
+            color: white;
+            text-align: center;
+            padding: 1.2rem;
+        }
+        #content{
+            margin-top: 5%;
+            margin-left: 40%;
+        }
+    </style>
+</head>
+<body>
+    <a href="/"><H1>HOME</H1></a>
+    <h1>Employee Management system</h1>
+    <div id="content">
+        <h2>Edit Employee</h2>
+        <br>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table width="300px" height="150px">
+                <tr>
+                    <td>
+                        Employee Name:
+                    </td>
+                    <td>
+                        <input type="text" name="name" id="name" placeholder="Enter full Name" value="{{ emp_data.Name }}" required>
+                    </td>
+                </tr>    
+                <tr>
+                    <td>
+                        Department:
+                    </td>
+                    <td>
+                        <input type="department" name="department" id="department" value="{{ emp_data.Department }}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Salary:
+                    </td>
+                    <td>
+                        <input type="number" name="salary" id="salary" value="{{ emp_data.Salary }}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="submit" id="submit" value="Sumbit">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
